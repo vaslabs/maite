@@ -35,6 +35,8 @@ class GeoStore[Res, Area >: TerrestrialArea](f: Area => Res)(implicit pointCheck
         val result = AreaResult(key, f())
         sender() ! result.data
         self ! UpdateCache(action, result)
+      case AreaResult(key, res: Res) =>
+        sender() ! res
     }
   }
 }
