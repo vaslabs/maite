@@ -23,6 +23,7 @@ object Dependencies {
       private val generic = "io.circe" %% "circe-generic" % version
       private val parser = "io.circe" %% "circe-parser" % version
       private val java8 = "io.circe" %% "circe-java8" % version
+      val refined = "io.circe" %% "circe-refined" % version
       val all = Seq(core, generic, parser, java8)
     }
     object cats {
@@ -54,7 +55,7 @@ object Dependencies {
     }
   }
 
-  lazy val `service-model` = libs.circe.all :+ libs.test.scalatest
+  lazy val `service-model` = libs.circe.all ++ libs.refined.all ++ Seq(libs.test.scalatest, libs.circe.refined)
   lazy val `geo-cache` = libs.akka.all ++ libs.refined.all ++ libs.cats.required  ++
     Seq(libs.cats.effects, libs.test.scalatest)
 }
