@@ -17,10 +17,6 @@ package object geo {
 
   type Longitude = Double Refined LongRange
 
-  implicit def toLat(x: Double): Either[String, Latitude] = refineV[LatRange](x)
-  implicit def toLong(x: Double): Either[String, Longitude] = refineV[LongRange](x)
-
-
   case class GeoPoint(lat: Latitude, lng: Longitude)
 
   case class SquareId(value: PosInt)
