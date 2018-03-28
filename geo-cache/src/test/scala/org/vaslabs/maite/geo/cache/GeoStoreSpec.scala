@@ -28,6 +28,8 @@ class GeoStoreSpec extends TestKit(ActorSystem("GeoCacheSpec")) with WordSpecLik
       geoStore ! GeoStore.Protocol.StoreArea(dummyTerrestrialArea)
       geoStore ! GeoStore.Protocol.GetArea(GeoPoint(2.3, 2.3))
       expectMsg(dummyData)
+      geoStore ! GeoStore.Protocol.GetArea(GeoPoint(2.3, -1.0))
+      expectMsg(GeoStore.Protocol.NotFound)
     }
   }
 
