@@ -5,10 +5,10 @@ object Dependencies {
   object libs {
     object versions {
       object cats {
-        val version = "0.9.0"
+        val version = "1.0.1"
       }
       object circe {
-        val version = "0.8.0"
+        val version = "0.9.3"
       }
       object refined {
         val version = "0.8.7"
@@ -30,6 +30,7 @@ object Dependencies {
       private val core = "org.typelevel" %% "cats-core" % version
       private val macros = "org.typelevel" %% "cats-macros" % version
       private val kernel = "org.typelevel" %% "cats-kernel" % version
+      val effects = "org.typelevel" %% "cats-effect" % "0.10"
       val required = Seq(core, macros, kernel)
     }
 
@@ -54,5 +55,6 @@ object Dependencies {
   }
 
   lazy val `service-model` = libs.circe.all :+ libs.test.scalatest
-  lazy val `geo-cache` = libs.akka.all ++ libs.refined.all :+ libs.test.scalatest
+  lazy val `geo-cache` = libs.akka.all ++ libs.refined.all ++ libs.cats.required  ++
+    Seq(libs.cats.effects, libs.test.scalatest)
 }
